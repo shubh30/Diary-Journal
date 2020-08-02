@@ -23,17 +23,15 @@ app.get('/', function (req, res) {
   res.render('home', { startingContent: homeStartingContent, allPosts: posts });
 });
 
-app.get('/posts/:postName', function(req, res) {
+app.get('/posts/:postName', function (req, res) {
   const requestedTitle = _.lowerCase(req.params.postName);
-  posts.forEach(function(post) {
+  posts.forEach(function (post) {
     const storedTitle = _.lowerCase(post.title);
-    if(storedTitle === requestedTitle) {
-      console.log('Match Found');
-    } else {
-      console.log();
+    if (storedTitle === requestedTitle) {
+      res.render('post', { title: post.title, content: post.content });
     }
-  })
-})
+  });
+});
 
 app.get('/about', function (req, res) {
   res.render('about', { about: aboutContent });
